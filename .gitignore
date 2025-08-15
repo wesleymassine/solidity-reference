@@ -1,0 +1,20 @@
+# Future Plans (não subir para público ainda)
+future/
+
+# IDE
+.vscode/
+.idea/
+
+# Node modules (se usar Hardhat/Foundry futuramente)
+node_modules/
+cache/
+artifacts/
+out/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
