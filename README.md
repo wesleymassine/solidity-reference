@@ -28,20 +28,20 @@ This repository contains a complete, professional-grade Solidity reference cover
 | 1 | [DataTypes.sol](DataTypes.sol) | All Solidity data types with examples | Beginner |
 | 2 | [Functions.sol](Functions.sol) | Complete function reference | Beginner |
 | 3 | [Inheritance.sol](Inheritance.sol) | Inheritance, abstracts, interfaces | Intermediate |
-| 5 | [Libraries.sol](Libraries.sol) | Library patterns and usage | Intermediate |
-| 6 | [ControlFlow.sol](ControlFlow.sol) | Loops, conditionals, error handling | Beginner |
-| 7 | [Globals.sol](Globals.sol) | Global variables, units, time | Beginner |
-| 8 | [Operators.sol](Operators.sol) | All operators and expressions | Beginner |
-| 9 | [EtherTransfer.sol](EtherTransfer.sol) | transfer/send/call methods | Intermediate |
-| 10 | [DataLocation.sol](DataLocation.sol) | storage/memory/calldata | Intermediate |
-| 11 | [Cryptography.sol](Cryptography.sol) | Hashing, signatures, verification | Advanced |
-| 12 | [Assembly.sol](Assembly.sol) | Inline assembly (Yul) | Advanced |
-| 13 | [Patterns.sol](Patterns.sol) | Design patterns | Advanced |
-| 14 | [Security.sol](Security.sol) | Security & vulnerabilities | Advanced |
-| 15 | [GasOptimization.sol](GasOptimization.sol) | Gas optimization techniques | Advanced |
-| 16 | [Standards.sol](Standards.sol) | ERC20, ERC721, ERC1155, ERC2981 | Advanced |
-| 17 | [Imports.sol](Imports.sol) | Project organization | Intermediate |
-| 18 | [BestPractices.sol](BestPractices.sol) | ⭐ Bad vs Good code patterns (Senior) | Professional |
+| 4 | [Libraries.sol](Libraries.sol) | Library patterns and usage | Intermediate |
+| 5 | [ControlFlow.sol](ControlFlow.sol) | Loops, conditionals, error handling | Beginner |
+| 6 | [Globals.sol](Globals.sol) | Global variables, units, time | Beginner |
+| 7 | [Operators.sol](Operators.sol) | All operators and expressions | Beginner |
+| 8 | [EtherTransfer.sol](EtherTransfer.sol) | transfer/send/call methods | Intermediate |
+| 9 | [DataLocation.sol](DataLocation.sol) | storage/memory/calldata | Intermediate |
+| 10 | [Cryptography.sol](Cryptography.sol) | Hashing, signatures, verification | Advanced |
+| 11 | [Assembly.sol](Assembly.sol) | Inline assembly (Yul) | Advanced |
+| 12 | [Patterns.sol](Patterns.sol) | Design patterns | Advanced |
+| 13 | [Security.sol](Security.sol) | Security & vulnerabilities | Advanced |
+| 14 | [GasOptimization.sol](GasOptimization.sol) | Gas optimization techniques | Advanced |
+| 15 | [Standards.sol](Standards.sol) | ERC20, ERC721, ERC1155, ERC2981 | Advanced |
+| 16 | [Imports.sol](Imports.sol) | Project organization | Intermediate |
+| 17 | [BestPractices.sol](BestPractices.sol) | ⭐ Bad vs Good code patterns (Senior) | Professional |
 
 📋 **See [README_ROADMAP.md](README_ROADMAP.md) for detailed learning path**
 
@@ -103,7 +103,7 @@ This project now includes **complete resources for Brazilian developers**:
 ## 🌟 What Makes This Special
 
 ### ✨ Comprehensive Coverage
-- **18 complete reference files** covering all Solidity concepts
+- **17 complete reference files** covering all Solidity concepts
 - **Over 10,000 lines** of extensively commented code
 - **150+ practical examples** demonstrating best practices
 - **NEW: Bad vs Good code comparisons** for professional development
@@ -356,5 +356,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **⭐ If this repository helps you, please give it a star! ⭐**
 
 Made with ❤️ for the Ethereum developer community 🇧🇷
+“This repo is a learning/reference resource (not audited production contracts).”
 
 </div>

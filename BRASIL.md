@@ -158,7 +158,7 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 
 ---
 
-## 🏆 Hackathons no Brasil
+## 🏆 Hackathons no Brasil - Links e calendário podem mudar; PRs bem-vindos para atualizar.
 
 ### Calendário 2026
 
@@ -289,7 +289,7 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 ## ✅ Checklist do Desenvolvedor Web3
 
 ### Técnico
-- [ ] Completar 18 arquivos deste repo (Projetos em andamento)
+- [ ] Completar 17 arquivos deste repo (Projetos em andamento)
 - [ ] 3+ projetos no GitHub
 - [ ] Deploy no Sepolia (testnet)
 - [ ] Participar de 1 auditoria

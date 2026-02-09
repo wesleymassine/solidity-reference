@@ -27,7 +27,7 @@
 
 ## 📖 FILE DETAILS
 
-### 12. Assembly.sol - Inline Assembly (Yul)
+### 11. Assembly.sol - Inline Assembly (Yul)
 - Yul syntax and basics
 - Memory management
 - Storage manipulation
@@ -35,7 +35,7 @@
 - create, create2
 - Gas optimization with assembly
 
-### 13. Patterns.sol - Design Patterns
+### 12. Patterns.sol - Design Patterns
 - Factory pattern
 - Proxy/Upgradeable contracts
 - Access control patterns
@@ -45,7 +45,7 @@
 - State machine
 - Oracle pattern
 
-### 14. Security.sol - Security & Vulnerabilities
+### 13. Security.sol - Security & Vulnerabilities
 - Reentrancy attacks
 - Integer overflow/underflow (pre-0.8.0)
 - Front-running
@@ -56,7 +56,7 @@
 - Signature replay attacks
 - Access control issues
 
-### 15. GasOptimization.sol - Gas Optimization
+### 14. GasOptimization.sol - Gas Optimization
 - Storage packing
 - Short-circuiting
 - Batch operations
@@ -67,7 +67,7 @@
 - Custom errors
 - Events vs storage
 
-### 16. Standards.sol - ERC Token Standards
+### 15. Standards.sol - ERC Token Standards
 - ERC20 (Fungible tokens)
 - ERC721 (NFTs)
 - ERC1155 (Multi-token)
@@ -75,7 +75,7 @@
 - ERC2981 (NFT Royalty)
 - ERC4626 (Tokenized vaults)
 
-### 17. Imports.sol - Project Organization
+### 16. Imports.sol - Project Organization
 - Import syntax
 - Relative vs absolute imports
 - npm packages
@@ -83,7 +83,7 @@
 - Remappings
 - Project structure best practices
 
-### 18. BestPractices.sol - Professional Code Quality (⭐ NEW!)
+### 17. BestPractices.sol - Professional Code Quality (⭐ NEW!)
 - Naming conventions & code style
 - State variable organization
 - Function visibility & ordering
