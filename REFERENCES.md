@@ -1,4 +1,4 @@
-# 📚 Referências Complementares
+# 📚 Referências Complementares - PT-BR
 
 Este documento lista recursos externos de alta qualidade para complementar seus estudos em Solidity e Web3.
 
@@ -156,7 +156,6 @@ Este documento lista recursos externos de alta qualidade para complementar seus 
 
 ### Em Português
 - **Web3 Brasil** - Notícias e tutoriais
-- **Crypto Insights** - Análises técnicas
 
 ---
 

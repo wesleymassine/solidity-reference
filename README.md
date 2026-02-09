@@ -1,5 +1,5 @@
 # 🚀 Solidity Complete Reference
-## From Zero to Professional Developer
+## From Zero to Professional Developer 
 
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?style=for-the-badge&logo=solidity)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)

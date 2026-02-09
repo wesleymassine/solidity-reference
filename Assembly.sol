@@ -10,7 +10,7 @@ contract Assembly {
     // ============================================================================
     // 1. INTRODUCTION TO INLINE ASSEMBLY
     // ============================================================================
-    // Inline assembly allows low-level access to the EVM
+    // Inline assembly allows low-level access to the EVM1
     // Uses Yul language (intermediate language for Ethereum)
     // Benefits: Gas optimization, low-level operations
     // Risks: Bypasses Solidity's safety checks, harder to audit

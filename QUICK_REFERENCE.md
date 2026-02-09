@@ -432,7 +432,7 @@ Events & Errors:
 3. [Capture The Ether](https://capturetheether.com) - Classic CTF
 
 **Best Video Courses:**
-1. [Patrick Collins 32h Course](https://www.youtube.com/watch?v=gyMwXuJrbJQ) - Free & comprehensive
+1. [Patrick Collins 38h+ Course](https://www.youtube.com/watch?v=-1GB6m39-rM&t=39s) - Free & comprehensive
 2. [Smart Contract Programmer](https://www.youtube.com/@smartcontractprogrammer) - Bite-sized topics
 3. [Cyfrin Updraft](https://updraft.cyfrin.io) - Professional grade
 

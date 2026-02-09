@@ -47,24 +47,19 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 
 ---
 
-## 💼 Vagas & Oportunidades no Brasil
+## 💼 Vagas & Oportunidades no Brasil (Atualizado em Fevereiro de 2026)
 
 ### Empresas Web3 Brasileiras Contratando
-
-**2XT (2XT.com.br)**
-- Posições: Smart Contract Dev, Backend Blockchain
-- Stack: Solidity, Node.js, AWS
-- [LinkedIn](https://linkedin.com/company/2xt) | [Twitter](https://twitter.com/2xt_oficial)
-
-**Liqi Digital Assets**
-- Posições: Blockchain Developer, Solidity Engineer
-- Foco: Tokenização de ativos
-- [Site](https://liqi.com.br/) | [LinkedIn](https://linkedin.com/company/liqi)
 
 **Mercado Bitcoin**
 - Posições: Blockchain Engineer, Security Engineer
 - Maior exchange brasileira
 - [Carreiras](https://mercadobitcoin.gupy.io/)
+
+**Liqi Digital Assets**
+- Posições: Blockchain Developer, Solidity Engineer
+- Foco: Tokenização de ativos
+- [Site](https://liqi.com.br/) | [LinkedIn](https://linkedin.com/company/liqi)
 
 **Hathor Network**
 - Posições: Core Developer, Smart Contract Dev
@@ -94,7 +89,7 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 
 ## 💰 Ganhe Dinheiro Enquanto Aprende
 
-### Bug Bounties (em Português)
+### Bug Bounties
 
 **Immunefi**
 - Bugs em português são aceitos
@@ -113,37 +108,6 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 - Similar ao Code4rena
 - [Platform](https://sherlock.xyz/)
 
-### Freelancing Web3 Brasil
-
-**CryptoEmpregos**
-- Board de vagas em português
-- [Site](https://cryptoempregos.com/)
-
-**Web3 Jobs Brazil**
-- Telegram: @web3jobsbrasil
-- Discord: Web3 Careers BR
-
-**Upwork/Fiverr**
-- Tag: "Solidity Developer Brazil"
-- Projetos: $50-$200/hora
-
-### Consultoria & Auditorias
-
-**Pacote Iniciante** (após 6 meses de estudo)
-- Code review: R$ 500-1,500
-- Smart contract development: R$ 3,000-8,000
-- Consultoria horária: R$ 150-300/h
-
-**Pacote Intermediário** (após 1 ano)
-- Auditoria básica: R$ 5,000-15,000
-- Desenvolvimento full-stack: R$ 10,000-30,000
-- Consultoria: R$ 300-500/h
-
-**Pacote Profissional** (após 2+ anos)
-- Auditoria completa: R$ 20,000-100,000+
-- Protocol development: R$ 50,000-200,000+
-- Consultoria: R$ 500-1,000/h
-
 ---
 
 ## 🤝 Comunidades Brasileiras
@@ -154,46 +118,12 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 - 5,000+ membros
 - Discussões diárias
 - Study groups
-- [Link](https://discord.gg/web3devbr)
+- [Link](https://discord.gg/web3dev)
 
 **Ethereum Brasil**
 - Comunidade oficial BR
 - Events & hackathons
-- [Link](https://t.me/ethereumbrasil)
-
-**DeFi Brasil**
-- Foco em finanças descentralizadas
-- [Telegram](https://t.me/defibrasil)
-
-### Telegram Groups
-
-**Solidity Devs Brasil**
-- @soliditydevsbr
-- Ajuda técnica diária
-
-**Web3 Jobs Brasil**
-- @web3jobsbr
-- Vagas diárias
-
-**Crypto Devs BR**
-- @cryptodevsbr
-- Networking
-
-### Eventos Presenciais
-
-**ETH São Paulo**
-- Maior hackathon Web3 da América Latina
-- Prêmios: $100k+
-- [Site](https://www.ethsaopaulo.com/)
-
-**Blockchain Rio**
-- Conferência anual no Rio de Janeiro
-- [Site](https://www.blockchainrio.io/)
-
-**Campus Party**
-- Trilha de blockchain
-- Workshops práticos
-- [Site](https://brasil.campus-party.org/)
+- [Link](https://www.ethereumbrasil.com/)
 
 ---
 
@@ -201,18 +131,10 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 
 ### Cursos Online
 
-**Curso Solidity - Moralis Academy (PT-BR)**
-- Legendas em português
-- Certificação
-- [Link](https://academy.moralis.io/)
-
-**Web3 Brasil - YouTube**
-- Tutoriais gratuitos
-- [Canal](https://youtube.com/@web3brasil)
 
 **Blockchain Insper**
 - Cursos universitários
-- [Site](https://www.insper.edu.br/blockchain/)
+- [Site](https://blockchainsper.com/)
 
 ### Blogs & Newsletters
 
@@ -223,10 +145,6 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 **CriptoFácil**
 - Educação cripto
 - [Site](https://www.criptofacil.com/)
-
-**Web3 Brasil Newsletter**
-- Semanal, tech-focused
-- [Substack](https://web3brasil.substack.com/)
 
 ### Livros Traduzidos
 
@@ -260,12 +178,6 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 - DeFi Summit Brasil (Outubro)
 - NFT Brasil (Novembro)
 
-### Prêmios Típicos
-- 🥇 1º Lugar: R$ 20,000-50,000
-- 🥈 2º Lugar: R$ 10,000-30,000
-- 🥉 3º Lugar: R$ 5,000-15,000
-- 🎁 Menções: R$ 1,000-5,000
-
 ---
 
 ## 💡 Dicas para Brasileiros
@@ -284,41 +196,44 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 
 **Recursos**
 - [Receita Federal - Cripto](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/dirpf/criptoativos)
-- Contador especializado: @contadorescripto (Telegram)
+- Contador especializado: [declarecripto](https://declarecripto.com.br/)
 
 ### Recebendo Pagamentos
 
 **Exchanges Brasileiras**
 - Mercado Bitcoin
-- Bitso
 - NovaDAX
-- Binance P2P
+- Foxbit
+- NovaDAX
+- Bitybank
+- BitcoinTrade
+- BrasilBitcoin
 
 **Wallets Recomendadas**
 - MetaMask (mais usado)
 - Ledger (hardware wallet)
 - Trust Wallet (mobile)
 
-**USDC → BRL**
-- Via exchange: 1-3% fee
-- Via P2P: 0.5-1% fee
-- Via Wise/TransferWise: ~1% fee
+**USDC → BRL** (Consultar taxas)
+- Via exchange
+- Via P2P
+- Via Wise/TransferWise:
 
 ---
 
-## 🎯 Roadmap de Carreira no Brasil
+## 🎯 Roadmap de Carreira
 
 ### Mês 1-3: Fundamentos
 - [ ] Complete arquivos básicos deste repo
 - [ ] Entre em 3 comunidades BR
-- [ ] Faça networking no Telegram
-- [ ] Assista 10 vídeos em PT-BR
+- [ ] Faça networking no Linkedin
+- [ ] Assista 10 vídeos em PT-BR e EN
 
 ### Mês 4-6: Primeiro Projeto
 - [ ] Build 1 projeto portfolio
 - [ ] Deploy na testnet
-- [ ] Tweet sobre o projeto
-- [ ] Candidate-se a vagas junior
+- [ ] Compartilhe sobre o projeto
+- [ ] Candidate-se a vagas
 
 ### Mês 7-9: Contribuições
 - [ ] Participe de 1 hackathon
@@ -364,40 +279,39 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 - #100DaysOfSolidity
 
 **Estratégia de crescimento:**
-1. Tweet diário sobre seu aprendizado
+1. Linkedin diário sobre seu aprendizado
 2. Thread semanal sobre projeto
 3. Engage com comunidade internacional
-4. Retweet e comente devs brasileiros
-5. Mostre código, não só teoria
+4. Mostre código, não só teoria
 
 ---
 
-## ✅ Checklist do Desenvolvedor Web3 Brasileiro
+## ✅ Checklist do Desenvolvedor Web3
 
 ### Técnico
-- [ ] Completar 18 arquivos deste repo
+- [ ] Completar 18 arquivos deste repo (Projetos em andamento)
 - [ ] 3+ projetos no GitHub
-- [ ] 1 projeto deployed mainnet
+- [ ] Deploy no Sepolia (testnet)
 - [ ] Participar de 1 auditoria
 
 ### Comunidade
 - [ ] Ativo em 3 grupos BR
-- [ ] 100+ seguidores Twitter
+- [ ] Seguir no Twitter/X referências
 - [ ] Contribuir em 1 projeto open-source
 - [ ] Apresentar em 1 evento
 
 ### Profissional
 - [ ] LinkedIn atualizado
-- [ ] Portfolio website
+- [ ] Portfolio github website
 - [ ] Primeira vaga ou freelance
-- [ ] Network com 10+ devs Web3
+- [ ] Network com devs Web3
 
 ---
 
 ## 🎯 Objetivo Final
 
 **Em 12 meses, você deve:**
-- ✅ Estar empregado em Web3
+- ✅ Estar trabalhando com Web3
 - ✅ Ou ganhando via freelance/bounties
 - ✅ Ter portfolio sólido
 - ✅ Ser reconhecido na comunidade BR
@@ -405,5 +319,3 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 ---
 
 **O mercado Web3 no Brasil precisa de você! Vamos construir juntos! 🇧🇷🚀**
-
-**Dúvidas? Entre no Discord e me marque (@wesleys0426)**

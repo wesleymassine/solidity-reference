@@ -255,6 +255,7 @@ You're ready for professional work when you can:
 - [Smart Contract Programmer](https://www.youtube.com/@smartcontractprogrammer) - Advanced topics
 - [Alchemy University](https://university.alchemy.com) - Web3 bootcamp
 - [Secureum Bootcamp](https://secureum.substack.com) - Security-focused
+- courses, hackathons, and paid communities will truly accelerate and certify your learning
 
 **Audit Reports (Learn from Experts):**
 - [Code4rena](https://code4rena.com/reports) - Public audits & findings
@@ -271,7 +272,6 @@ You're ready for professional work when you can:
 - [Uniswap V3 Development Book](https://uniswapv3book.com) - DeFi deep dive
 
 **Newsletters & Blogs:**
-- [Week in Ethereum](https://weekinethereumnews.com) - Weekly roundup
 - [Immunefi Blog](https://medium.com/@immunefi) - Bug bounties & security
 - [Trail of Bits Blog](https://blog.trailofbits.com) - Security research
 - [OpenZeppelin Blog](https://blog.openzeppelin.com) - Best practices
@@ -287,7 +287,7 @@ You're ready for professional work when you can:
 **Discord Servers:**
 - Foundry Official - Development support
 - Hardhat Official - Framework help
-- OpenZeppelin - Security discussions
+- OpenZeppelin - Security discussions 
 - ETHGlobal - Hackathon community
 
 **Competitive Learning:**
@@ -343,7 +343,7 @@ You're ready for professional work when you can:
 14. Gasless transaction relayer
 15. Cross-chain bridge (Layer 2)
 
-### 🏆 CERTIFICATION & VALIDATION
+### 🏆 VALIDATION
 
 **Skills to Master:**
 - ✅ Write gas-optimized contracts (<50k gas for common operations)
