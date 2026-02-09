@@ -356,6 +356,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **⭐ If this repository helps you, please give it a star! ⭐**
 
 Made with ❤️ for the Ethereum developer community 🇧🇷
-“This repo is a learning/reference resource (not audited production contracts).”https://github.com/wesleymassine/solidity-reference
+
+---
+
+“This repo is a learning/reference resource (not audited production contracts).
 
 </div>
