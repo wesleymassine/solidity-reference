@@ -107,16 +107,6 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 - Salários transparentes
 - [Site](https://remoteok.com/remote-web3-jobs)
 
-**UseWeb3**
-- Focado em desenvolvedores
-- Jobs + learning resources
-- [Site](https://www.useweb3.xyz/jobs)
-
-**Bankless Jobs**
-- Curadoria de vagas premium
-- Empresas verificadas
-- [Site](https://jobs.bankless.com/)
-
 **FindWeb3**
 - Interface limpa, fácil navegação
 - Filtros avançados
