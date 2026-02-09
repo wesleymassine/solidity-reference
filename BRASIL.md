@@ -85,6 +85,55 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 - Empresa global, cultura latina-friendly
 - [Carreiras](https://openzeppelin.com/jobs)
 
+### Portais de Emprego Web3 (Internacionais - Remote)
+
+**Web3 Career**
+- Maior portal de vagas Web3
+- Filtro por remote, salário, stack
+- [Site](https://web3.career/)
+
+**CryptoJobsList**
+- 8,000+ vagas ativas
+- Remote-first companies
+- [Site](https://cryptojobslist.com/web3)
+
+**Cryptocurrency Jobs**
+- Especializado em blockchain
+- Newsletter semanal
+- [Site](https://cryptocurrencyjobs.co/)
+
+**RemoteOK - Web3**
+- Filtro específico para Web3/Crypto
+- Salários transparentes
+- [Site](https://remoteok.com/remote-web3-jobs)
+
+**UseWeb3**
+- Focado em desenvolvedores
+- Jobs + learning resources
+- [Site](https://www.useweb3.xyz/jobs)
+
+**Bankless Jobs**
+- Curadoria de vagas premium
+- Empresas verificadas
+- [Site](https://jobs.bankless.com/)
+
+**FindWeb3**
+- Interface limpa, fácil navegação
+- Filtros avançados
+- [Site](https://findweb3.com/jobs)
+
+**CryptoJobs**
+- Portal consolidado Web3
+- Vagas de startups a enterprises
+- [Site](https://www.cryptojobs.com/web3)
+
+### Vagas Específicas para Brasil
+
+**Web3 Career - Brazil**
+- Filtro específico para vagas no Brasil
+- Remote + Local opportunities
+- [Site](https://web3.career/web3-jobs-brazil)
+
 ---
 
 ## 💰 Ganhe Dinheiro Enquanto Aprende
