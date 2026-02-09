@@ -54,7 +54,7 @@ O mercado Web3 no Brasil está em **crescimento**, mas a maioria dos recursos es
 **Mercado Bitcoin**
 - Posições: Blockchain Engineer, Security Engineer
 - Maior exchange brasileira
-- [Carreiras](https://mercadobitcoin.gupy.io/)
+- [Carreiras](https://mb.inhire.app/vagas)
 
 **Liqi Digital Assets**
 - Posições: Blockchain Developer, Solidity Engineer
