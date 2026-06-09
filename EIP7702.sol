@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.30;
 
 // =============================================================================
 // EIP-7702: SET EOA ACCOUNT CODE (PECTRA UPGRADE)
