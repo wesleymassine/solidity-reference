@@ -17,8 +17,9 @@ pragma solidity ^0.8.24;
 //  2.  AMM — Uniswap V3 (concentrated liquidity)
 //  3.  Flash Loans — Aave V3
 //  4.  Flash Swaps — Uniswap V3
-//  5.  Oracles — Chainlink Price Feeds
+//  5.  Oracles — Chainlink Price Feeds (push)
 //  6.  Oracles — TWAP (Time-Weighted Average Price)
+//  6b. Oracles — Pull (Pyth / RedStone / Chronicle)
 //  7.  Lending & Borrowing — Core Mechanics
 //  8.  Liquidations
 //  9.  Interest Rate Models
@@ -897,6 +898,104 @@ contract UniswapV3TWAP {
         // For a full implementation use TickMath.getSqrtRatioAtTick()
         uint160 sqrtPriceX96 = UniswapV3Math.tickToSqrtPrice(tick);
         return UniswapV3Math.sqrtPriceX96ToPrice(sqrtPriceX96, d0, d1);
+    }
+}
+
+// ============================================================
+// SECTION 6b: ORACLES — PULL (PYTH / REDSTONE / CHRONICLE)
+// ============================================================
+
+/*
+ * PUSH vs PULL ORACLES:
+ *
+ * PUSH (Chainlink classic): a decentralized network writes prices on-chain on
+ *   its own schedule. You just read the latest answer. Simple, but you pay for
+ *   updates you may not need and coverage/heartbeats are fixed.
+ *
+ * PULL (Pyth, RedStone, Chronicle): prices live off-chain, signed by the
+ *   provider. The USER submits a fresh signed update in the SAME transaction,
+ *   then reads it. Dominant on L2s/appchains in 2025-2026 because it is cheap,
+ *   has thousands of feeds, and sub-second freshness.
+ *
+ *   Flow (Pyth):
+ *     1. Off-chain: fetch `updateData` (signed VAA) from Hermes/price service.
+ *     2. On-chain: pay `getUpdateFee`, call `updatePriceFeeds(updateData)`.
+ *     3. Read `getPriceNoOlderThan(id, maxAge)` — REVERTS if stale.
+ *
+ *   PROVIDER NOTES:
+ *   - Pyth      : `updatePriceFeeds` + pull; price has a confidence interval.
+ *   - RedStone  : signed data is APPENDED to calldata; an on-chain extractor
+ *                 reads it (no separate update tx). Great for gas.
+ *   - Chronicle : `read()` gated to authorized readers (`kiss`/`diss`), MakerDAO lineage.
+ *
+ *   SECURITY:
+ *   - ALWAYS bound staleness (maxAge) and reject price <= 0.
+ *   - Use the confidence interval: reject if conf/price is too wide.
+ *   - Pull updates are permissionless — never trust caller-provided prices
+ *     without verifying through the oracle contract.
+ */
+
+/// @notice Minimal Pyth interface (pull oracle).
+interface IPyth {
+    struct Price {
+        int64  price;        // scaled by 10^expo
+        uint64 conf;         // confidence interval (same exponent)
+        int32  expo;         // e.g. -8
+        uint256 publishTime; // unix seconds
+    }
+
+    function getUpdateFee(bytes[] calldata updateData) external view returns (uint256 fee);
+    function updatePriceFeeds(bytes[] calldata updateData) external payable;
+    function getPriceNoOlderThan(bytes32 id, uint256 age) external view returns (Price memory);
+}
+
+/// @title PythConsumer — update-then-read a pull oracle in one transaction
+contract PythConsumer {
+    IPyth public immutable pyth;
+
+    error StalePrice();
+    error InvalidPrice();
+    error ConfidenceTooWide();
+
+    constructor(address _pyth) {
+        pyth = IPyth(_pyth);
+    }
+
+    /// @notice Submit a fresh signed update, then read it. Returns price scaled to 1e18.
+    /// @param updateData signed price update fetched off-chain (Hermes)
+    /// @param priceId    the Pyth feed id (e.g. ETH/USD)
+    /// @param maxAge     maximum acceptable staleness in seconds
+    function updateAndGetPrice(bytes[] calldata updateData, bytes32 priceId, uint256 maxAge)
+        external
+        payable
+        returns (uint256 price18)
+    {
+        uint256 fee = pyth.getUpdateFee(updateData);
+        pyth.updatePriceFeeds{value: fee}(updateData);
+
+        IPyth.Price memory p = pyth.getPriceNoOlderThan(priceId, maxAge); // reverts if stale
+        if (p.price <= 0) revert InvalidPrice();
+
+        // reject quotes whose confidence band is wider than 2% of the price
+        if (p.conf != 0 && (uint256(p.conf) * 50) > uint256(uint64(p.price))) {
+            revert ConfidenceTooWide();
+        }
+
+        price18 = _scaleTo1e18(uint256(uint64(p.price)), p.expo);
+
+        // refund any unused fee to the caller
+        if (msg.value > fee) {
+            (bool ok, ) = msg.sender.call{value: msg.value - fee}("");
+            ok;
+        }
+    }
+
+    function _scaleTo1e18(uint256 priceU, int32 expo) internal pure returns (uint256) {
+        if (expo >= 0) {
+            return priceU * (10 ** uint256(uint32(expo))) * 1e18;
+        }
+        uint256 d = uint256(uint32(-expo));
+        return d <= 18 ? priceU * (10 ** (18 - d)) : priceU / (10 ** (d - 18));
     }
 }
 
