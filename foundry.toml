@@ -1,0 +1,35 @@
+[profile.default]
+# This repo is a flat collection of self-contained reference files (no external
+# imports), so we compile everything in the repo root directly.
+src = "."
+out = "out"
+libs = ["lib"]
+solc_version = "0.8.28"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+# Some reference contracts have many local vars / event args; the IR pipeline
+# avoids "stack too deep" without forcing artificial refactors.
+via_ir = true
+
+# Reference files are educational; some intentionally show patterns that trip
+# linters. Keep the build signal focused on real compilation errors.
+ignored_warnings_from = ["."]
+
+[profile.default.lint]
+# These are reference contracts: keep high/medium-severity findings, but silence
+# stylistic/perf notes that are intentional or irrelevant for teaching examples.
+severity = ["high", "med"]
+exclude_lints = [
+    "asm-keccak256",          # readability favored over hand-rolled assembly
+    "erc20-unchecked-transfer", # examples use minimal IERC20 by design
+    "unwrapped-modifier-logic", # modifiers kept inline for clarity
+    "mixed-case-function",
+    "mixed-case-variable",
+    "screaming-snake-case-const",
+    "pascal-case-struct",
+    "incorrect-shift",        # false positive: `1 << position` is the correct bit-set idiom
+    "unsafe-typecast",        # truncating casts are shown deliberately as examples
+]
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md
