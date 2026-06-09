@@ -21,11 +21,13 @@ Este guia apresenta projetos práticos progressivos para consolidar o conhecimen
 ### Projeto 1.1: Token ERC20 com Taxas
 **Arquivos de referência**: DataTypes.sol, Functions.sol, Standards.sol
 
+✅ **Implementação completa**: [`01-simple-token`](https://github.com/wesleymassine/solidity-projects/tree/main/01-simple-token) — ERC20 com taxa de transferência de 2%, 47 testes passando, OpenZeppelin 5.x e documentação completa (TUTORIAL, SECURITY, ARCHITECTURE, TEST_COVERAGE, PRODUCTION_READINESS).
+
 **Funcionalidades**:
-- [ ] Transfer com taxa de 2%
-- [ ] Whitelist sem taxas
-- [ ] Burn automático da taxa
-- [ ] Owner pode mudar taxa
+- [x] Transfer com taxa de 2%
+- [x] Whitelist sem taxas
+- [x] Burn automático da taxa
+- [x] Owner pode mudar taxa
 
 **Desafios extras**:
 - [ ] Adicionar pause mechanism
@@ -33,7 +35,7 @@ Este guia apresenta projetos práticos progressivos para consolidar o conhecimen
 - [ ] Sistema de rewards para holders
 
 **Tempo estimado**: 1 semana  
-**Tecnologias**: Solidity 0.8.24, Hardhat, OpenZeppelin
+**Tecnologias**: Solidity 0.8.x, Hardhat, OpenZeppelin 5.x
 
 ---
 

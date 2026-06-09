@@ -4,8 +4,9 @@
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?style=for-the-badge&logo=solidity)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![CI](https://img.shields.io/github/actions/workflow/status/wesleymassine/solidity-reference/ci.yml?style=for-the-badge&label=build)
 
-> **The most comprehensive Solidity learning resource - 17 complete files covering 100% of professional development skills**
+> **The most comprehensive Solidity learning resource - 32 complete files covering 100% of professional development skills**
 
 ---
 
@@ -42,6 +43,21 @@ This repository contains a complete, professional-grade Solidity reference cover
 | 15 | [Standards.sol](Standards.sol) | ERC20, ERC721, ERC1155, ERC2981 | Advanced |
 | 16 | [Imports.sol](Imports.sol) | Project organization | Intermediate |
 | 17 | [BestPractices.sol](BestPractices.sol) | ⭐ Bad vs Good code patterns (Senior) | Professional |
+| 18 | [Testing.sol](Testing.sol) | Foundry testing: unit, fuzz, invariant, fork, ERC-4337 | Professional |
+| 19 | [Deploy.sol](Deploy.sol) | Foundry scripts: deploy, verify, multisig, CI/CD, CREATE2 | Professional |
+| 20 | [Integration.md](Integration.md) | Frontend: ethers.js v6, viem v2, wagmi, ERC-4337 gasless, SIWE | Professional |
+| 21 | [DeFi.sol](DeFi.sol) | AMM math, flash loans, oracles, liquidations, MEV, governance | Professional |
+| 22 | [L2.sol](L2.sol) | L2 architecture, opcode diffs, bridges, CCIP, LayerZero, zkSync | Professional |
+| 23 | [FormalVerification.sol](FormalVerification.sol) | SMTChecker, Certora CVL, Echidna, Halmos, Gambit, invariant design | Professional |
+| 24 | [Upgrades.sol](Upgrades.sol) | Transparent/UUPS/Beacon/Diamond proxies, ERC-7201, storage gaps, slashing, timelocks | Professional |
+| 25 | [EIP7702.sol](EIP7702.sol) | EOA delegation (Pectra), session keys, EIP-1271, sponsored txs, vs ERC-4337 | Expert |
+| 26 | [Intents.sol](Intents.sol) | Intent architecture, Dutch auction (UniswapX), solvers, ERC-7521, cross-chain (ERC-7683) | Expert |
+| 27 | [RWA.sol](RWA.sol) | Real World Assets, ERC-3643/T-REX, identity registry, compliance modules, DvP, dividends | Expert |
+| 28 | [ZKProofs.sol](ZKProofs.sol) | Groth16/PLONK/STARK, ZK coprocessors (Axiom/SP1), nullifiers, ZK airdrop, recursive proofs | Expert |
+| 29 | [EigenLayer.sol](EigenLayer.sol) | Restaking, AVS design, operator registration, slashing conditions, EigenPod, rewards | Expert |
+| 30 | [UniswapV4.sol](UniswapV4.sol) | Singleton PoolManager, hooks architecture, dynamic fees, TWAMM, limit orders, custom curves | Expert |
+| 31 | [Governance.sol](Governance.sol) | Governor + TimelockController, proposal lifecycle, vetoGuardian, Snapshot hybrid, NFT voting | Expert |
+| 32 | [Tokenomics.sol](Tokenomics.sol) | Vesting (cliff/linear), Merkle airdrop, bonding curves, staking rewards, veToken, buyback/burn | Expert |
 
 📋 **See [README_ROADMAP.md](README_ROADMAP.md) for detailed learning path**
 
@@ -61,7 +77,18 @@ git clone https://github.com/wesleymassine/solidity-reference.git
 cd solidity-reference
 ```
 
-### 2. Choose Your Learning Path
+### 2. Compile Everything (verified in CI)
+
+All 31 `.sol` files compile with [Foundry](https://getfoundry.sh) and are checked on every push:
+
+```bash
+forge build          # compile all reference contracts
+forge build --sizes  # also report deployed bytecode sizes
+```
+
+> Config lives in [foundry.toml](foundry.toml) (solc 0.8.28, `via_ir`, Cancun EVM). The files are self-contained — no external dependencies to install.
+
+### 3. Choose Your Learning Path
 
 **Beginner Path (4 weeks):**
 ```
@@ -78,7 +105,18 @@ DataLocation.sol → Inheritance.sol → Libraries.sol → EtherTransfer.sol →
 Assembly.sol → Patterns.sol → Security.sol → GasOptimization.sol → Standards.sol → BestPractices.sol
 ```
 
-### 3. Study & Practice
+**Professional Path (3 weeks):**
+```
+Testing.sol → Deploy.sol → Integration.md → DeFi.sol → L2.sol → FormalVerification.sol
+```
+
+**Expert Path (3 weeks — 2025/2026 trends):**
+```
+Upgrades.sol → EIP7702.sol → Intents.sol → RWA.sol → ZKProofs.sol → EigenLayer.sol
+→ UniswapV4.sol → Governance.sol → Tokenomics.sol
+```
+
+### 4. Study & Practice
 - Open files in VS Code, Remix, or your favorite editor
 - Read comments thoroughly
 - Run examples in [Remix IDE](https://remix.ethereum.org)
@@ -103,7 +141,7 @@ This project now includes **complete resources for Brazilian developers**:
 ## 🌟 What Makes This Special
 
 ### ✨ Comprehensive Coverage
-- **17 complete reference files** covering all Solidity concepts
+- **32 complete reference files** covering all Solidity concepts
 - **Over 10,000 lines** of extensively commented code
 - **150+ practical examples** demonstrating best practices
 - **NEW: Bad vs Good code comparisons** for professional development
@@ -332,14 +370,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Stats
 
-- **17 Complete Files** (NEW: BestPractices.sol added!)
-- **10,000+ Lines of Code**
+- **32 Complete Files** (NEW: Upgrades.sol, EIP7702.sol, Intents.sol, RWA.sol, ZKProofs.sol, EigenLayer.sol, UniswapV4.sol, Governance.sol, Tokenomics.sol)
+- **22,000+ Lines of Code**
 - **150+ Examples**
 - **15+ Design Patterns**
 - **20+ Security Topics**
 - **50+ Gas Optimization Techniques**
 - **15+ Bad vs Good Pattern Comparisons**
 - **15+ Practical Projects** (Beginner to Professional)
+- **ERC-4337 Account Abstraction** (2024/2026)
+- **EIP-7702 EOA Delegation** (Pectra 2025)
+- **Intent-based transactions** (UniswapX / ERC-7521 / ERC-7683)
+- **Real World Assets** (ERC-3643 T-REX, DvP settlement)
+- **ZK Proofs & Coprocessors** (Groth16, SP1, Axiom)
+- **EigenLayer Restaking & AVS** (operators, slashing, EigenPods)
+- **Foundry Testing: unit, fuzz, invariant, fork**
 - **Brazilian Community Resources** 🇧🇷
 
 ---
