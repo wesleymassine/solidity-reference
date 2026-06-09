@@ -1,12 +1,12 @@
 # 🚀 Solidity Complete Reference
 ## From Zero to Professional Developer 
 
-![Solidity](https://img.shields.io/badge/Solidity-0.8.24-363636?style=for-the-badge&logo=solidity)
+![Solidity](https://img.shields.io/badge/Solidity-0.8.30-363636?style=for-the-badge&logo=solidity)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
 ![CI](https://img.shields.io/github/actions/workflow/status/wesleymassine/solidity-reference/ci.yml?style=for-the-badge&label=build)
 
-> **The most comprehensive Solidity learning resource - 32 complete files covering 100% of professional development skills**
+> **The most comprehensive Solidity learning resource - 33 complete files covering 100% of professional development skills**
 
 ---
 
@@ -58,6 +58,7 @@ This repository contains a complete, professional-grade Solidity reference cover
 | 30 | [UniswapV4.sol](UniswapV4.sol) | Singleton PoolManager, hooks architecture, dynamic fees, TWAMM, limit orders, custom curves | Expert |
 | 31 | [Governance.sol](Governance.sol) | Governor + TimelockController, proposal lifecycle, vetoGuardian, Snapshot hybrid, NFT voting | Expert |
 | 32 | [Tokenomics.sol](Tokenomics.sol) | Vesting (cliff/linear), Merkle airdrop, bonding curves, staking rewards, veToken, buyback/burn | Expert |
+| 33 | [ModularAccounts.sol](ModularAccounts.sol) | ERC-7579 modular smart accounts, module types, session keys, ECDSA validator, ERC-4337 + EIP-7702 stack | Expert |
 
 📋 **See [README_ROADMAP.md](README_ROADMAP.md) for detailed learning path**
 
@@ -79,14 +80,14 @@ cd solidity-reference
 
 ### 2. Compile Everything (verified in CI)
 
-All 31 `.sol` files compile with [Foundry](https://getfoundry.sh) and are checked on every push:
+All 32 `.sol` files compile with [Foundry](https://getfoundry.sh) and are checked on every push:
 
 ```bash
 forge build          # compile all reference contracts
 forge build --sizes  # also report deployed bytecode sizes
 ```
 
-> Config lives in [foundry.toml](foundry.toml) (solc 0.8.28, `via_ir`, Cancun EVM). The files are self-contained — no external dependencies to install.
+> Config lives in [foundry.toml](foundry.toml) (solc 0.8.30, `via_ir`, Cancun EVM). The files are self-contained — no external dependencies to install.
 
 ### 3. Choose Your Learning Path
 
@@ -113,7 +114,7 @@ Testing.sol → Deploy.sol → Integration.md → DeFi.sol → L2.sol → Formal
 **Expert Path (3 weeks — 2025/2026 trends):**
 ```
 Upgrades.sol → EIP7702.sol → Intents.sol → RWA.sol → ZKProofs.sol → EigenLayer.sol
-→ UniswapV4.sol → Governance.sol → Tokenomics.sol
+→ UniswapV4.sol → Governance.sol → Tokenomics.sol → ModularAccounts.sol
 ```
 
 ### 4. Study & Practice
@@ -141,7 +142,7 @@ This project now includes **complete resources for Brazilian developers**:
 ## 🌟 What Makes This Special
 
 ### ✨ Comprehensive Coverage
-- **32 complete reference files** covering all Solidity concepts
+- **33 complete reference files** covering all Solidity concepts
 - **Over 10,000 lines** of extensively commented code
 - **150+ practical examples** demonstrating best practices
 - **NEW: Bad vs Good code comparisons** for professional development
@@ -370,7 +371,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Stats
 
-- **32 Complete Files** (NEW: Upgrades.sol, EIP7702.sol, Intents.sol, RWA.sol, ZKProofs.sol, EigenLayer.sol, UniswapV4.sol, Governance.sol, Tokenomics.sol)
+- **33 Complete Files** (NEW: ModularAccounts.sol (ERC-7579), Upgrades.sol, EIP7702.sol, Intents.sol, RWA.sol, ZKProofs.sol, EigenLayer.sol, UniswapV4.sol, Governance.sol, Tokenomics.sol)
 - **22,000+ Lines of Code**
 - **150+ Examples**
 - **15+ Design Patterns**

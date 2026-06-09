@@ -3,7 +3,7 @@
 
 ---
 
-## ✅ COMPLETED FILES (32 total)
+## ✅ COMPLETED FILES (33 total)
 
 ### 🟢 Beginner
 1. **DataTypes.sol** - All Solidity data types with examples
@@ -46,6 +46,7 @@
 30. **UniswapV4.sol** - Singleton PoolManager, hooks, dynamic fees, TWAMM, custom curves
 31. **Governance.sol** - Governor + TimelockController, proposal lifecycle, NFT voting
 32. **Tokenomics.sol** - Vesting, Merkle airdrop, bonding curves, staking, veToken, buyback
+33. **ModularAccounts.sol** - ERC-7579 modular smart accounts, session keys, ECDSA validator (4337 + 7702 stack)
 
 ---
 
@@ -458,7 +459,7 @@ Track your learning progress:
 - [ ] Intermediate Level (Inheritance, Libraries, EtherTransfer, DataLocation, Imports) - Weeks 5-8
 - [ ] Advanced Level (Cryptography, Assembly, Patterns, Security, GasOptimization, Standards, BestPractices) - Weeks 9-12
 - [ ] Professional Level (Testing, Deploy, Integration, DeFi, L2, FormalVerification) - Weeks 13-15
-- [ ] Expert Level (Upgrades, EIP7702, Intents, RWA, ZKProofs, EigenLayer, UniswapV4, Governance, Tokenomics) - Weeks 16-18
+- [ ] Expert Level (Upgrades, EIP7702, Intents, RWA, ZKProofs, EigenLayer, UniswapV4, Governance, Tokenomics, ModularAccounts) - Weeks 16-18
 - [ ] Build 3 small projects
 - [ ] Build 1 medium-sized project
 - [ ] Contribute to open source
