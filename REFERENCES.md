@@ -95,7 +95,8 @@ Este documento lista recursos externos de alta qualidade para complementar seus 
 - **Objetivo**: Hackear contratos vulneráveis para aprender
 
 ### Damn Vulnerable DeFi
-- **GitHub**: [tinchoabbate/damn-vulnerable-defi](https://github.com/tinchoabbate/ethereum-security-hacking-resources)
+- **Site**: [damnvulnerabledefi.xyz](https://www.damnvulnerabledefi.xyz/)
+- **GitHub**: [theredguild/damn-vulnerable-defi](https://github.com/theredguild/damn-vulnerable-defi)
 - **Descrição**: Desafios de segurança DeFi
 - **Nível**: Intermediário a Avançado
 - **Foco**: Protocolos DeFi reais
@@ -200,7 +201,7 @@ Este documento lista recursos externos de alta qualidade para complementar seus 
 
 Este documento será atualizado com novos recursos conforme o ecossistema evolui.
 
-**Última atualização**: Fevereiro 2026
+**Última atualização**: Junho 2026
 
 ---
 
