@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.30;
 
 // ============================================================
 //  UPGRADES.SOL — Upgradeable Contract Patterns: Complete Reference
@@ -701,6 +701,10 @@ contract ERC7201Storage {
     // ERC-7201 slot. Inline assembly only accepts literal constants, so the
     // derivation below is precomputed:
     //   keccak256(abi.encode(uint256(keccak256("myprotocol.main")) - 1)) & ~bytes32(uint256(0xff))
+    //
+    // MODERN (Solidity 0.8.35+): the native `erc7201` builtin computes this for
+    // you and IS usable in inline assembly, e.g.:
+    //   bytes32 private constant MAIN_STORAGE_LOCATION = erc7201("myprotocol.main");
     bytes32 private constant MAIN_STORAGE_LOCATION =
         0x8df417c1575b8946a9fdccf2ade6378aa56ff1da7833c87b1533757e15459300;
 
