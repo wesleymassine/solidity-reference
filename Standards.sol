@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.30;
 
 // ============================================================================
 // SOLIDITY TOKEN STANDARDS - Complete Reference
@@ -143,6 +143,79 @@ contract ERC20Token is IERC20 {
         }
 
         emit Transfer(msg.sender, address(0), amount);
+    }
+}
+
+// ----------------------------------------------------------------------------
+// 1b. ERC-2612 — PERMIT (GASLESS APPROVALS VIA EIP-712 SIGNATURE)
+// ----------------------------------------------------------------------------
+//
+// ERC-2612 lets a holder approve a spender with an OFF-CHAIN signature instead
+// of an on-chain approve() tx. The spender (or a relayer) submits the signature,
+// so the holder spends no gas and dApps can do "approve + action" in one tx.
+// It is ubiquitous in DeFi (Uniswap, Aave, DAI-style permits).
+//
+// SECURITY:
+// - Bind to a nonce (replay protection) and a deadline (expiry).
+// - Bind to chainId + contract address via the EIP-712 domain separator, so a
+//   signature can't be replayed on another chain or a fork.
+// - Reject signer == address(0) (ecrecover returns 0 on a bad signature).
+
+contract ERC20Permit is ERC20Token {
+    bytes32 private constant _EIP712_DOMAIN_TYPEHASH =
+        keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
+    bytes32 private constant _PERMIT_TYPEHASH =
+        keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
+
+    mapping(address => uint256) public nonces;
+
+    // Cache the domain separator; rebuild it if the chainId changes (fork safety).
+    uint256 private immutable _CACHED_CHAIN_ID;
+    bytes32 private immutable _CACHED_DOMAIN_SEPARATOR;
+
+    constructor(string memory n, string memory s, uint8 d, uint256 supply)
+        ERC20Token(n, s, d, supply)
+    {
+        _CACHED_CHAIN_ID = block.chainid;
+        _CACHED_DOMAIN_SEPARATOR = _buildDomainSeparator();
+    }
+
+    function DOMAIN_SEPARATOR() public view returns (bytes32) {
+        return block.chainid == _CACHED_CHAIN_ID
+            ? _CACHED_DOMAIN_SEPARATOR
+            : _buildDomainSeparator();
+    }
+
+    function _buildDomainSeparator() private view returns (bytes32) {
+        return keccak256(abi.encode(
+            _EIP712_DOMAIN_TYPEHASH,
+            keccak256(bytes(name)),
+            keccak256(bytes("1")),
+            block.chainid,
+            address(this)
+        ));
+    }
+
+    function permit(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external {
+        require(block.timestamp <= deadline, "ERC2612: expired deadline");
+
+        bytes32 structHash = keccak256(abi.encode(
+            _PERMIT_TYPEHASH, owner, spender, value, nonces[owner]++, deadline
+        ));
+        bytes32 digest = keccak256(abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR(), structHash));
+
+        address signer = ecrecover(digest, v, r, s);
+        require(signer != address(0) && signer == owner, "ERC2612: invalid signature");
+
+        _approve(owner, spender, value);
     }
 }
 
