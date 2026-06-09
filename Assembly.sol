@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.24;
+pragma solidity ^0.8.24;
 
 // ============================================================================
 // SOLIDITY INLINE ASSEMBLY (YUL) - Complete Reference
@@ -465,7 +465,7 @@ contract Assembly {
             uint256 blockNumber,
             uint256 blockTimestamp,
             uint256 gasLimit,
-            uint256 difficulty,
+            uint256 prevRandao,
             address coinbaseAddr
         )
     {
@@ -473,7 +473,7 @@ contract Assembly {
             blockNumber := number()
             blockTimestamp := timestamp()
             gasLimit := gaslimit()
-            difficulty := prevrandao() // Was difficulty() pre-merge
+            prevRandao := prevrandao() // Was difficulty() pre-merge
             coinbaseAddr := coinbase()
         }
     }
