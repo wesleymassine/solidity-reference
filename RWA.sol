@@ -19,7 +19,7 @@ pragma solidity ^0.8.30;
 // Core technical requirements:
 //   1. IDENTITY REGISTRY — KYC/AML: only verified investors can hold tokens
 //   2. COMPLIANCE MODULES — transfer restrictions (geography, investor type)
-//   3. TOKEN STANDARDS — ERC-3643 (T-REX), ERC-1400, wrapped ERC-20
+//   3. TOKEN STANDARDS — ERC-3643 (T-REX, Section 3), ERC-1400 (Section 8), wrapped ERC-20
 //   4. FORCED TRANSFERS — regulatory recovery (court orders, key loss)
 //   5. DIVIDEND DISTRIBUTION — on-chain income to token holders
 //   6. DELIVERY vs PAYMENT (DvP) — atomic settlement with stablecoins
@@ -782,6 +782,285 @@ contract RWAOracle {
 }
 
 // =============================================================================
+// SECTION 8 — ERC-1400 SECURITY TOKEN (PARTITIONS, DOCUMENTS, CONTROLLER)
+// =============================================================================
+// ERC-1400 is the Polymath family of security token standards — an ALTERNATIVE
+// to the ERC-3643 token in Section 3. Both enforce compliant transfers, but the
+// design philosophy differs:
+//
+//   ERC-3643 (Section 3)         ERC-1400 (this section)
+//   --------------------         -----------------------
+//   identity-centric             token-centric / partition-centric
+//   "WHO can receive?"           "HOW is the balance structured?"
+//   KYC + compliance built in    KYC left open; structure built in
+//   reverts on failure           returns ERC-1066 reason codes (try before send)
+//   dominant in EU/Tokeny        flexible for complex tranche structures
+//
+// ERC-1400 is itself a bundle of EIPs:
+//   - ERC-1410: PARTITIONS (tranches) — one balance split into named buckets
+//               (e.g., locked vs. unlocked, share class A vs. B)
+//   - ERC-1594: CORE — issue/redeem instead of mint/burn; canTransfer* returns a
+//               reason code so a caller knows WHY a transfer would fail in advance
+//   - ERC-1643: DOCUMENTS — legal documents (prospectus, terms) anchored on-chain
+//   - ERC-1644: CONTROLLER — forced transfer/redeem for regulatory recovery
+//
+// ERC-1066 status codes (returned by canTransferByPartition):
+//   0x50 transfer failure   0x51 transfer success   0x52 insufficient balance
+//   0x54 insufficient allowance   0x55 funds locked
+//   0x56 invalid sender     0x57 invalid receiver   0x59 invalid operator
+
+contract ERC1400Token {
+    // ---- ERC-20-style metadata ----
+    string public name;
+    string public symbol;
+    uint8  public constant decimals = 18;
+    uint256 public totalSupply;
+
+    // ---- ERC-1410: balances are split into PARTITIONS (tranches) ----
+    // A holder has a separate balance per partition. The aggregate balanceOf is
+    // the sum across partitions and is what ERC-20 consumers see.
+    mapping(address => uint256) public balanceOf;                          // aggregate
+    mapping(address => mapping(bytes32 => uint256)) public balanceOfByPartition;
+    mapping(address => bytes32[]) internal _partitionsOf;                  // partitions a holder touched
+    mapping(address => mapping(bytes32 => bool)) internal _knownPartition; // dedupe helper
+
+    // Example partitions (any bytes32 works; commonly ASCII-encoded labels)
+    bytes32 public constant LOCKED   = "locked";   // e.g., under lock-up / vesting
+    bytes32 public constant UNLOCKED = "unlocked"; // freely transferable
+
+    // ---- ERC-1410/1594: operators (delegates allowed to move tokens) ----
+    mapping(address => mapping(address => bool)) internal _operators;      // global operators
+    mapping(bytes32 => mapping(address => mapping(address => bool))) internal _operatorsByPartition;
+
+    // ---- ERC-1643: on-chain document registry ----
+    struct Document {
+        string  uri;        // IPFS/HTTPS link to the legal document
+        bytes32 docHash;    // keccak256 of the document contents (integrity)
+        uint256 timestamp;  // last update
+    }
+    mapping(bytes32 => Document) internal _documents;  // name => document
+    bytes32[] internal _documentNames;
+
+    // ---- Compliance / access control ----
+    IdentityRegistry public immutable identityRegistry; // shared with Section 1
+    address public owner;
+    address public controller;   // ERC-1644 regulatory controller
+    bool    public isControllable; // can be turned off permanently to reassure holders
+    bool    public isIssuable;     // once false, no more tokens can ever be issued
+
+    // ---- Events ----
+    event TransferByPartition(
+        bytes32 indexed partition, address operator,
+        address indexed from, address indexed to, uint256 value, bytes data
+    );
+    event IssuedByPartition(bytes32 indexed partition, address indexed to, uint256 value);
+    event RedeemedByPartition(bytes32 indexed partition, address operator, address indexed from, uint256 value);
+    event AuthorizedOperator(address indexed operator, address indexed holder);
+    event RevokedOperator(address indexed operator, address indexed holder);
+    event DocumentUpdated(bytes32 indexed name, string uri, bytes32 docHash);
+    event ControllerTransfer(address controller, address indexed from, address indexed to, uint256 value, bytes data);
+    event ControllerRedemption(address controller, address indexed from, uint256 value, bytes data);
+
+    error NotOwner();
+    error NotController();
+    error NotIssuable();
+    error TransferRejected(bytes1 code);
+
+    constructor(string memory _name, string memory _symbol, address _identityRegistry) {
+        name = _name;
+        symbol = _symbol;
+        identityRegistry = IdentityRegistry(_identityRegistry);
+        owner = msg.sender;
+        controller = msg.sender;
+        isControllable = true;
+        isIssuable = true;
+    }
+
+    modifier onlyOwner() {
+        if (msg.sender != owner) revert NotOwner();
+        _;
+    }
+
+    // ==========================================================================
+    // ERC-1594: canTransferByPartition — DRY-RUN a transfer, NO state change.
+    // Wallets/exchanges call this first to show the user WHY a transfer would
+    // fail, instead of broadcasting a tx that reverts. Returns:
+    //   code         ERC-1066 status byte (0x51 = success)
+    //   reason       extra application data (here: a human-readable label)
+    //   destination  partition the tokens land in (may differ from source)
+    // ==========================================================================
+    function canTransferByPartition(
+        address from,
+        address to,
+        bytes32 partition,
+        uint256 value,
+        bytes calldata /* data */
+    ) public view returns (bytes1 code, bytes32 reason, bytes32 destination) {
+        if (to == address(0))                              return (0x57, "invalid receiver", partition);
+        if (value == 0 || balanceOfByPartition[from][partition] < value)
+                                                           return (0x52, "insufficient balance", partition);
+        if (!identityRegistry.isRegistered(to))            return (0x57, "receiver not KYC'd", partition);
+        if (!identityRegistry.isRegistered(from))          return (0x56, "sender not KYC'd", partition);
+        if (partition == LOCKED)                           return (0x55, "funds locked", partition);
+        // Success: locked partition would route to UNLOCKED, others stay put.
+        destination = partition;
+        return (0x51, "transferable", destination);
+    }
+
+    // ==========================================================================
+    // ERC-1410: transferByPartition — move tokens within a specific tranche.
+    // ==========================================================================
+    function transferByPartition(bytes32 partition, address to, uint256 value, bytes calldata data)
+        external
+        returns (bytes32)
+    {
+        return _transferByPartition(partition, msg.sender, msg.sender, to, value, data);
+    }
+
+    // Operator-driven transfer (delegate authorized by the holder).
+    function operatorTransferByPartition(
+        bytes32 partition, address from, address to, uint256 value, bytes calldata data
+    ) external returns (bytes32) {
+        require(_isOperatorFor(partition, msg.sender, from), "not authorized operator");
+        return _transferByPartition(partition, msg.sender, from, to, value, data);
+    }
+
+    function _transferByPartition(
+        bytes32 partition, address operator, address from, address to, uint256 value, bytes calldata data
+    ) internal returns (bytes32) {
+        // Enforce the same rule the dry-run reports. Reverting keeps state safe.
+        (bytes1 code,, bytes32 dest) = canTransferByPartition(from, to, partition, value, data);
+        if (code != 0x51) revert TransferRejected(code);
+
+        balanceOfByPartition[from][partition] -= value;
+        balanceOf[from] -= value;
+        _creditPartition(to, dest, value);
+
+        emit TransferByPartition(partition, operator, from, to, value, data);
+        return dest;
+    }
+
+    // ==========================================================================
+    // ERC-1594: issue / redeem (the security-token equivalent of mint / burn).
+    // ==========================================================================
+    function issueByPartition(bytes32 partition, address to, uint256 value, bytes calldata /* data */)
+        external
+        onlyOwner
+    {
+        if (!isIssuable) revert NotIssuable();
+        require(identityRegistry.isRegistered(to), "receiver not KYC'd");
+        _creditPartition(to, partition, value);
+        totalSupply += value;
+        emit IssuedByPartition(partition, to, value);
+    }
+
+    function redeemByPartition(bytes32 partition, uint256 value, bytes calldata /* data */) external {
+        balanceOfByPartition[msg.sender][partition] -= value;
+        balanceOf[msg.sender] -= value;
+        totalSupply -= value;
+        emit RedeemedByPartition(partition, msg.sender, msg.sender, value);
+    }
+
+    // Permanently disable issuance — a strong signal to investors (fixed supply).
+    function finalizeIssuance() external onlyOwner {
+        isIssuable = false;
+    }
+
+    // ==========================================================================
+    // ERC-1410: operator management
+    // ==========================================================================
+    function authorizeOperator(address operator) external {
+        _operators[msg.sender][operator] = true;
+        emit AuthorizedOperator(operator, msg.sender);
+    }
+
+    function revokeOperator(address operator) external {
+        _operators[msg.sender][operator] = false;
+        emit RevokedOperator(operator, msg.sender);
+    }
+
+    function authorizeOperatorByPartition(bytes32 partition, address operator) external {
+        _operatorsByPartition[partition][msg.sender][operator] = true;
+        emit AuthorizedOperator(operator, msg.sender);
+    }
+
+    function isOperator(address operator, address holder) external view returns (bool) {
+        return _operators[holder][operator];
+    }
+
+    function _isOperatorFor(bytes32 partition, address operator, address holder) internal view returns (bool) {
+        return operator == holder
+            || _operators[holder][operator]
+            || _operatorsByPartition[partition][holder][operator];
+    }
+
+    // ==========================================================================
+    // ERC-1643: document management (legal docs anchored on-chain)
+    // ==========================================================================
+    function setDocument(bytes32 docName, string calldata uri, bytes32 docHash) external onlyOwner {
+        if (_documents[docName].timestamp == 0) _documentNames.push(docName);
+        _documents[docName] = Document(uri, docHash, block.timestamp);
+        emit DocumentUpdated(docName, uri, docHash);
+    }
+
+    function getDocument(bytes32 docName) external view returns (string memory, bytes32, uint256) {
+        Document storage d = _documents[docName];
+        return (d.uri, d.docHash, d.timestamp);
+    }
+
+    function getAllDocuments() external view returns (bytes32[] memory) {
+        return _documentNames;
+    }
+
+    // ==========================================================================
+    // ERC-1644: controller operations (regulatory forced transfer / redemption).
+    // Holders can verify isControllable() — if false, no forced moves are possible.
+    // ==========================================================================
+    function controllerTransfer(
+        bytes32 partition, address from, address to, uint256 value, bytes calldata data, bytes calldata /* opData */
+    ) external {
+        if (msg.sender != controller || !isControllable) revert NotController();
+        balanceOfByPartition[from][partition] -= value;
+        balanceOf[from] -= value;
+        _creditPartition(to, partition, value);
+        emit ControllerTransfer(msg.sender, from, to, value, data);
+        emit TransferByPartition(partition, msg.sender, from, to, value, data);
+    }
+
+    function controllerRedeem(
+        bytes32 partition, address from, uint256 value, bytes calldata data, bytes calldata /* opData */
+    ) external {
+        if (msg.sender != controller || !isControllable) revert NotController();
+        balanceOfByPartition[from][partition] -= value;
+        balanceOf[from] -= value;
+        totalSupply -= value;
+        emit ControllerRedemption(msg.sender, from, value, data);
+    }
+
+    // Renounce control permanently (token becomes non-controllable forever).
+    function renounceControl() external onlyOwner {
+        isControllable = false;
+        controller = address(0);
+    }
+
+    // ==========================================================================
+    // Views & helpers
+    // ==========================================================================
+    function partitionsOf(address holder) external view returns (bytes32[] memory) {
+        return _partitionsOf[holder];
+    }
+
+    function _creditPartition(address to, bytes32 partition, uint256 value) internal {
+        if (!_knownPartition[to][partition]) {
+            _knownPartition[to][partition] = true;
+            _partitionsOf[to].push(partition);
+        }
+        balanceOfByPartition[to][partition] += value;
+        balanceOf[to] += value;
+    }
+}
+
+// =============================================================================
 // PROFESSIONAL CHECKLIST: RWA AUDIT POINTS
 // =============================================================================
 //
@@ -800,3 +1079,10 @@ contract RWAOracle {
 // [ ] Fractional: all share transfers require KYC check
 // [ ] Legal compliance: legalDocumentURI points to binding legal docs on IPFS
 // [ ] Role separation: owner (governance) vs agent (operations) vs attester (oracle)
+// [ ] ERC-1400 partitions: per-partition balances always sum to aggregate balanceOf
+// [ ] ERC-1400 canTransferByPartition: dry-run logic matches the revert path exactly
+// [ ] ERC-1400 reason codes: ERC-1066 byte returned for every failure case
+// [ ] ERC-1400 operators: per-partition and global operator authority checked
+// [ ] ERC-1400 documents: docHash matches off-chain file (integrity, not just URI)
+// [ ] ERC-1400 controller: forced moves gated by isControllable; renounce is permanent
+// [ ] ERC-1400 issuance: finalizeIssuance() makes supply fixed and irreversible

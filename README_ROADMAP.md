@@ -40,7 +40,7 @@
 24. **Upgrades.sol** - Transparent/UUPS/Beacon/Diamond, ERC-7201, storage gaps
 25. **EIP7702.sol** - EOA delegation (Pectra), session keys, EIP-1271, sponsored txs
 26. **Intents.sol** - Intent architecture, UniswapX Dutch auction, ERC-7521/7683
-27. **RWA.sol** - ERC-3643/T-REX, identity registry, compliance, DvP, dividends
+27. **RWA.sol** - ERC-3643/T-REX, ERC-1400 (partitions/documents/controller), identity registry, compliance, DvP, dividends
 28. **ZKProofs.sol** - Groth16/PLONK/STARK, ZK coprocessors (Axiom/SP1), nullifiers
 29. **EigenLayer.sol** - Restaking, AVS design, operator registration, slashing, EigenPod
 30. **UniswapV4.sol** - Singleton PoolManager, hooks, dynamic fees, TWAMM, custom curves

@@ -52,7 +52,7 @@ This repository contains a complete, professional-grade Solidity reference cover
 | 24 | [Upgrades.sol](Upgrades.sol) | Transparent/UUPS/Beacon/Diamond proxies, ERC-7201, storage gaps, slashing, timelocks | Professional |
 | 25 | [EIP7702.sol](EIP7702.sol) | EOA delegation (Pectra), session keys, EIP-1271, sponsored txs, vs ERC-4337 | Expert |
 | 26 | [Intents.sol](Intents.sol) | Intent architecture, Dutch auction (UniswapX), solvers, ERC-7521, cross-chain (ERC-7683) | Expert |
-| 27 | [RWA.sol](RWA.sol) | Real World Assets, ERC-3643/T-REX, identity registry, compliance modules, DvP, dividends | Expert |
+| 27 | [RWA.sol](RWA.sol) | Real World Assets, ERC-3643/T-REX, ERC-1400 (partitions/documents/controller), identity registry, compliance modules, DvP, dividends | Expert |
 | 28 | [ZKProofs.sol](ZKProofs.sol) | Groth16/PLONK/STARK, ZK coprocessors (Axiom/SP1), nullifiers, ZK airdrop, recursive proofs | Expert |
 | 29 | [EigenLayer.sol](EigenLayer.sol) | Restaking, AVS design, operator registration, slashing conditions, EigenPod, rewards | Expert |
 | 30 | [UniswapV4.sol](UniswapV4.sol) | Singleton PoolManager, hooks architecture, dynamic fees, TWAMM, limit orders, custom curves | Expert |
@@ -382,7 +382,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **ERC-4337 Account Abstraction** (2024/2026)
 - **EIP-7702 EOA Delegation** (Pectra 2025)
 - **Intent-based transactions** (UniswapX / ERC-7521 / ERC-7683)
-- **Real World Assets** (ERC-3643 T-REX, DvP settlement)
+- **Real World Assets** (ERC-3643 T-REX, ERC-1400 security tokens, DvP settlement)
 - **ZK Proofs & Coprocessors** (Groth16, SP1, Axiom)
 - **EigenLayer Restaking & AVS** (operators, slashing, EigenPods)
 - **Foundry Testing: unit, fuzz, invariant, fork**
